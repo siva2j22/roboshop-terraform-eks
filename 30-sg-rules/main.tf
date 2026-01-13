@@ -383,15 +383,15 @@ resource "aws_security_group_rule" "cart_payment" {
   to_port           = 8080
 } */
 
-resource "aws_security_group_rule" "components_vpn" {
-  for_each = local.vpn_ingress_rules
-  type              = "ingress"
-  security_group_id = each.value.sg_id
-  source_security_group_id = local.open_vpn_sg_id
-  from_port         = each.value.port
-  protocol          = "tcp"
-  to_port           = each.value.port
-}
+# resource "aws_security_group_rule" "components_vpn" {
+#   for_each = local.vpn_ingress_rules
+#   type              = "ingress"
+#   security_group_id = each.value.sg_id
+#   source_security_group_id = local.open_vpn_sg_id
+#   from_port         = each.value.port
+#   protocol          = "tcp"
+#   to_port           = each.value.port
+# }
 
 #This is the mistake we did, cart can't access components directly from one component to another component. they should be communicated through backend ALB
 /* resource "aws_security_group_rule" "cart_shipping" {
